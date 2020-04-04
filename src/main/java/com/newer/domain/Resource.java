@@ -11,6 +11,7 @@ import javax.persistence.Table;
 /**
  * Create by 何辉
  * 2020/3/29 19:41
+ * 资源表
  */
 @Table(name = "t_tree_resource")
 @AllArgsConstructor

@@ -1,7 +1,7 @@
 package com.newer.controller;
 
-import com.newer.domain.CommonsResult;
-import com.newer.domain.Sessions;
+import com.newer.util.CommonsResult;
+import com.newer.util.Sessions;
 import com.newer.domain.User;
 import com.newer.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
+
     @PostMapping("/doLogin")
     public CommonsResult doLogin(@RequestBody User user,HttpSession session,ModelMap modelMap){
         System.out.println("接收到的登录信息:"+user);
@@ -33,7 +34,7 @@ public class LoginController {
         }catch (AuthenticationException e){
             e.printStackTrace();
             System.out.println("登录失败！");
-            return new CommonsResult(500,e.toString(),null);
+            return new CommonsResult(500,"登录失败",null);
         }
         User user1=(User)SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
         modelMap.put(Sessions.SESSION_LOGIN_USER,user1);

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Create by 何辉
@@ -30,20 +32,19 @@ public class Realm extends AuthorizingRealm {
         //1.从PrincipalCollection获取登录用户的信息
         User user= (User)principalCollection.getPrimaryPrincipal();
         //2.利用登录的用户信息来用来用户当前用户的角色或权限（可能需要查询数据库）
-        Set<String> roles = new HashSet<>();
-        int count=0;
+        Set roles = new HashSet<>();
         for(UserRole userRole:user.getUserRoles()){
             for (Role role:userRole.getRoles()){
                 for (RoleResource roleResource:role.getRoleResources()){
                     for (Resource resource:roleResource.getResources()){
-                        System.out.println(resource.getResourcecode()+count++);
+                        if (resource.getResourcecode()==null){
+                            continue;
+                        }
+                        roles.add(resource.getResourcecode());
                     }
                 }
             }
         }
-        roles.add("js:ls");
-        System.out.println("权限认证");
-
         return new SimpleAuthorizationInfo(roles);
     }
 

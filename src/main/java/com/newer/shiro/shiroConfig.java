@@ -1,10 +1,16 @@
 package com.newer.shiro;
 
+import com.newer.domain.Resource;
+import com.newer.service.ResourceService;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
+import org.apache.shiro.util.AntPathMatcher;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * Create by 何辉
@@ -12,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class shiroConfig {
+    @Autowired
+    private ResourceService service;
     /**
      * 需要提供一个 Realm 的实例。
      * @return
@@ -41,8 +49,16 @@ public class shiroConfig {
         DefaultShiroFilterChainDefinition definition=new DefaultShiroFilterChainDefinition();
         System.out.println("权限管理");
         definition.addPathDefinition("/doLogin","anon");
-        definition.addPathDefinition("/hello1","authc,roles[js:ls]");
-        definition.addPathDefinition("/hello","authc,roles[]");
+        List<Resource> allURL = this.service.findAllURL();
+        for (Resource resource:allURL){
+            if (resource.getResourcecode()==null||resource.getUrl()==null){
+                continue;
+            }
+            definition.addPathDefinition(resource.getUrl(),"authc,roles["+resource.getResourcecode()+"]");
+            System.out.println(resource.getResourcecode()+","+resource.getUrl());
+        }
+       definition.addPathDefinition("/hello1","authc,roles[hello1]");
+        definition.addPathDefinition("/hello","authc,roles[hello]");
         return definition;
     }
 }

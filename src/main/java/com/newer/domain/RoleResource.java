@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Create by 何辉
  * 2020/3/29 19:09
+ * 角色资源表
  */
 @Table(name = "t_tree_role_resource")
 @AllArgsConstructor

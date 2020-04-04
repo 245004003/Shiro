@@ -1,4 +1,4 @@
-package com.newer.domain;
+package com.newer.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,6 @@ import lombok.Data;
  * 2020/3/31 21:55
  */
 @Data
-@AllArgsConstructor
 public class Sessions {
     public  static  final  String SESSION_LOGIN_USER = "SessionLoginUser";
 }

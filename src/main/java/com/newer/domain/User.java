@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Create by 何辉
  * 2020/3/28 20:58
+ * 用户表
  */
 @Table(name = "t_tree_user")
 @AllArgsConstructor
