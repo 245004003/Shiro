@@ -57,8 +57,8 @@ public class shiroConfig {
             definition.addPathDefinition(resource.getUrl(),"authc,roles["+resource.getResourcecode()+"]");
             System.out.println(resource.getResourcecode()+","+resource.getUrl());
         }
-       definition.addPathDefinition("/hello1","authc,roles[hello1]");
-        definition.addPathDefinition("/hello","authc,roles[hello]");
+      // definition.addPathDefinition("/hello1","authc,roles[hello1]");
+       // definition.addPathDefinition("/hello","authc,roles[hello]");
         return definition;
     }
 }
