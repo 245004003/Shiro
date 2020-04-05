@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommonsResult<T> {
-
     private Integer code;//状态码 404 500 200
     private String message;//描述信息 登录成功
     private T       data;//

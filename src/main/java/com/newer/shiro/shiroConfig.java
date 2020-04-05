@@ -48,14 +48,13 @@ public class shiroConfig {
     ShiroFilterChainDefinition shiroFilterChainDefinition (){
         DefaultShiroFilterChainDefinition definition=new DefaultShiroFilterChainDefinition();
         System.out.println("权限管理");
-        definition.addPathDefinition("/doLogin","anon");
+        definition.addPathDefinition("user/doLogin","anon");
         List<Resource> allURL = this.service.findAllURL();
         for (Resource resource:allURL){
             if (resource.getResourcecode()==null||resource.getUrl()==null){
                 continue;
             }
             definition.addPathDefinition(resource.getUrl(),"authc,roles["+resource.getResourcecode()+"]");
-            System.out.println(resource.getResourcecode()+","+resource.getUrl());
         }
       // definition.addPathDefinition("/hello1","authc,roles[hello1]");
        // definition.addPathDefinition("/hello","authc,roles[hello]");
