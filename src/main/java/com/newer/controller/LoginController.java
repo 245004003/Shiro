@@ -35,7 +35,6 @@ public class LoginController {
             System.out.println("登录成功！");
         }catch (AuthenticationException e){
             e.printStackTrace();
-
             System.out.println("登录失败！");
             String str=e.toString();
             System.out.println(str.substring(str.lastIndexOf(":")+2));
